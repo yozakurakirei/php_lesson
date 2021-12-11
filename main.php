@@ -22,3 +22,4 @@ echo "<br>";
 $profile = outValiable("Hinata", 33);
 echo $profile;
 ?>
+
