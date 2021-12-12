@@ -2,6 +2,8 @@
 // CSRF
 session_start();
 
+require 'validation.php';
+
 // クリックジャッキング DENYは拒否
 header('X-FRAME-OPTIONS:DENY');
 
@@ -17,8 +19,9 @@ if(!empty($_POST)) {
 // >> 偽物か本物か判断する
 
 $pageFlag = 0;
+$error = validation($_POST);
 
-if(!empty($_POST["btn_confirm"])){
+if(!empty($_POST["btn_confirm"]) && empty($error)){
   $pageFlag = 1;
 }
 if(!empty($_POST["btn_submit"])){
@@ -106,6 +109,7 @@ function h($str) {
     }
     $token = $_SESSION["csrfToken"]
   ?>
+  
     入力画面を表示
     <form action="input.php" method="POST">
       <div>氏名</div>
